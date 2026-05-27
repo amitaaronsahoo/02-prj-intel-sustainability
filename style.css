@@ -1,1 +1,249 @@
-/* Add your CSS here */
+/*
+  Global page styling
+  These rules set the Intel-inspired colors, font choices, and spacing.
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #16324f;
+  background:
+    radial-gradient(circle at top, rgba(0, 113, 197, 0.15), transparent 35%),
+    linear-gradient(180deg, #f6fbff 0%, #eaf4fb 55%, #dceaf7 100%);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/*
+  Hero section styling
+  This area introduces the project with Intel branding and simple spacing.
+*/
+.hero {
+  padding: 3rem 1.25rem 1.5rem;
+}
+
+.hero__content {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, #ffffff 0%, #eef6fc 100%);
+  border: 1px solid rgba(0, 113, 197, 0.15);
+  box-shadow: 0 18px 40px rgba(16, 49, 87, 0.12);
+}
+
+.hero__logo {
+  width: 5.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.1;
+  color: #003c71;
+}
+
+.hero p {
+  margin: 1rem 0 0;
+  max-width: 45rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #35516f;
+}
+
+/*
+  Timeline layout
+  On large screens, the cards scroll horizontally with snap points.
+  On small screens, the cards stack vertically in a single column.
+*/
+.timeline {
+  position: relative;
+  display: flex;
+  gap: 1.25rem;
+  padding: 1rem 1.25rem 2rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 1.25rem;
+}
+
+/* Hide the timeline scrollbar but keep horizontal scrolling active. */
+.timeline::-webkit-scrollbar {
+  display: none;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  top: 2.65rem;
+  height: 0.2rem;
+  background: linear-gradient(90deg, #00a1de, #0071c5, #00c4ff);
+  border-radius: 999px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.timeline__hint {
+  max-width: 62rem;
+  margin: 0 auto 2rem;
+  padding: 0 1.25rem;
+  text-align: center;
+  color: #35516f;
+}
+
+/*
+  Milestone card styling
+  Each card is a focusable panel that reveals extra details on hover or focus.
+*/
+.milestone {
+  flex: 0 0 20rem;
+  scroll-snap-align: start;
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(0, 113, 197, 0.18);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 14px 30px rgba(15, 48, 83, 0.12);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  outline: none;
+}
+
+.milestone:hover,
+.milestone:focus-within,
+.milestone:focus {
+  transform: translateY(-0.35rem) scale(1.02);
+  border-color: rgba(0, 113, 197, 0.35);
+  box-shadow: 0 20px 40px rgba(15, 48, 83, 0.18);
+}
+
+.milestone__year {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin: 0 0 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: #0071c5;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.milestone h2 {
+  margin: 0 0 1rem;
+  color: #003c71;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+/*
+  Image area
+  Replace each source image with a new AI-generated corporate concept art file.
+*/
+.milestone__media {
+  margin: 0 0 1rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(0, 113, 197, 0.1), rgba(0, 160, 222, 0.16));
+  aspect-ratio: 16 / 10;
+}
+
+.milestone__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.milestone:hover .milestone__media img,
+.milestone:focus-within .milestone__media img {
+  transform: scale(1.05);
+}
+
+.milestone__summary {
+  margin: 0;
+  color: #24425f;
+  line-height: 1.6;
+}
+
+/*
+  Hidden extra details
+  These details stay hidden until the user hovers over or focuses the card.
+*/
+.milestone__details {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition: max-height 0.35s ease, opacity 0.35s ease, transform 0.35s ease, margin-top 0.35s ease;
+}
+
+.milestone__details p {
+  margin: 0;
+  padding-top: 0.9rem;
+  color: #35516f;
+  line-height: 1.7;
+}
+
+.milestone:hover .milestone__details,
+.milestone:focus-within .milestone__details,
+.milestone:focus .milestone__details {
+  max-height: 10rem;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*
+  Smaller screens
+  The timeline becomes a vertical stack so the layout stays easy to read.
+*/
+@media (max-width: 48rem) {
+  .hero {
+    padding-top: 1rem;
+  }
+
+  .hero__content {
+    padding: 1.5rem;
+  }
+
+  .timeline {
+    flex-direction: column;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .timeline::before {
+    display: none;
+  }
+
+  .milestone {
+    flex-basis: auto;
+    width: 100%;
+  }
+
+  .milestone__media img {
+    transform: none;
+  }
+
+  .milestone:hover,
+  .milestone:focus-within,
+  .milestone:focus {
+    transform: none;
+  }
+}
